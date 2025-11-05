@@ -33,3 +33,18 @@ if (carousel) {
         });
     }
 }
+
+// Gestion des ancres: empêcher le comportement par défaut et scroller l'élément ciblé
+const anchors = document.querySelectorAll(".carousel__nav a[href^='#']");
+anchors.forEach((a) => {
+    a.addEventListener("click", (e) => {
+        e.preventDefault();
+        const href = a.getAttribute("href");
+        if (!href) return;
+        const target = document.querySelector(href);
+        if (target) {
+            // Scroll the target into view inside the carousel
+            target.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        }
+    });
+});
