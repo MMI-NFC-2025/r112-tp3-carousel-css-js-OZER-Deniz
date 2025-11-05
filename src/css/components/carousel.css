@@ -17,41 +17,91 @@ Les margin négatifs à gauche et à droite corresponde à l'éespace entre le n
 
 */
 
-/* Compléter la suite du code */
+/* Conteneur main du carousel pour positionner les contrôles en absolu */
+.carousel {
+  position: relative;
+}
+
 .carousel__controls {
-  /* Utilise flexbox pour aligner les éléments enfants - https://developer.mozilla.org/fr/docs/Web/CSS/display */
-  /* Espace entre les éléments enfants 16px- https://developer.mozilla.org/fr/docs/Web/CSS/gap */
-  /* Aligne les éléments enfants au centre verticalement - https://developer.mozilla.org/fr/docs/Web/CSS/align-items */
-  /* Centre les éléments enfants horizontalement - https://developer.mozilla.org/fr/docs/Web/CSS/justify-content */
-  /* Marge de 16px en haut et en bas - https://developer.mozilla.org/fr/docs/Web/CSS/margin */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 8px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  /* désactive les interactions sur la zone, les boutons réactivent leur propre pointer-events */
 }
+
 .carousel__button {
-  /* Largeur du bouton 50px - https://developer.mozilla.org/fr/docs/Web/CSS/width */
-  /* Hauteur du bouton 50px - https://developer.mozilla.org/fr/docs/Web/CSS/height */
-  /* Utilise flexbox pour aligner le contenu du bouton - https://developer.mozilla.org/fr/docs/Web/CSS/display */
-  /* Aligne le contenu du bouton au centre verticalement - https://developer.mozilla.org/fr/docs/Web/CSS/align-items */
-  /* Centre le contenu du bouton horizontalement - https://developer.mozilla.org/fr/docs/Web/CSS/justify-content */
-  /* Bordure solide de 1px - https://developer.mozilla.org/fr/docs/Web/CSS/border */
-  /* Bordure arrondie pour faire un cercle - https://developer.mozilla.org/fr/docs/Web/CSS/border-radius */
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  pointer-events: auto;
+  /* ré-active le clic sur les boutons */
 }
+
 .carousel__button--prev {
-  /* Fait pivoter le bouton de 180 degrés - https://developer.mozilla.org/fr/docs/Web/CSS/transform */
+  transform: rotate(180deg);
 }
 
 .carousel__container {
-  /* Utilise flexbox pour aligner les éléments enfants - https://developer.mozilla.org/fr/docs/Web/CSS/display */
-  /* Espace entre les éléments enfants 16px - https://developer.mozilla.org/fr/docs/Web/CSS/gap */
-  /* Ajoute un défilement horizontal si le contenu déborde - https://developer.mozilla.org/fr/docs/Web/CSS/overflow */
-  /* Marge négative à gauche pour coller le carousel au bord de l'écran -24px - https://developer.mozilla.org/fr/docs/Web/CSS/margin */
-  /* Marge négative à droite pour coller le carousel au bord de l'écran -24px - https://developer.mozilla.org/fr/docs/Web/CSS/margin */
-  /* Définit le type de défilement pour accrocher les éléments - https://developer.mozilla.org/fr/docs/Web/CSS/scroll-snap-type */
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  margin-left: -24px;
+  margin-right: -24px;
+  padding: 16px 24px;
+  /* espace intérieur pour que le scroll commence après le bord négatif */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 .carousel__item {
-  /* L'élément prend 1 part de l'espace disponible, ne rétrécit pas, et a une largeur de base de 260px - https://developer.mozilla.org/fr/docs/Web/CSS/flex */
-  /* Aligne l'élément au centre lors du défilement - https://developer.mozilla.org/fr/docs/Web/CSS/scroll-snap-align */
+  flex: 0 0 80%;
+  max-width: 260px;
+  scroll-snap-align: center;
+}
+
+@media (min-width: 600px) {
+  .carousel__item {
+    flex: 0 0 260px;
+    /* taille fixe sur grand écran */
+  }
 }
 
 .carousel__item img {
-  /* Affiche l'image comme un bloc - https://developer.mozilla.org/fr/docs/Web/CSS/display */
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Navigation par ancres (liste simple) */
+.carousel__nav {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 8px 24px;
+  margin: 8px 0 0 0;
+}
+
+.carousel__nav a {
+  display: inline-block;
+  padding: 6px 10px;
+  background: #eee;
+  color: #222;
+  text-decoration: none;
+  border-radius: 4px;
 }
